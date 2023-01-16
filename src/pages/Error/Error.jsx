@@ -8,8 +8,8 @@ export default function Error() {
 		<Wrapper>
 			<div>
 				<img src={notFoundImg} alt="not found" />
-				<h3>text</h3>
-				<p>text</p>
+				<h3>Ohh! Page not found</h3>
+				<p>We can't seem to find the page you're looking for</p>
 				<Link to="/">back home</Link>
 			</div>
 		</Wrapper>
