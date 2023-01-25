@@ -1,4 +1,4 @@
-import { Error, Landing, Register } from "./pages";
+import { Error, Landing, ProtectedRoute, Register } from "./pages";
 import {
 	AddJob,
 	AllJobs,
@@ -14,7 +14,14 @@ function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<SharedLayout />}>
+				<Route
+					path="/"
+					element={
+						<ProtectedRoute>
+							<SharedLayout />
+						</ProtectedRoute>
+					}
+				>
 					<Route index element={<Stats />} />
 					<Route path="all-jobs" element={<AllJobs />} />
 					<Route path="add-job" element={<AddJob />} />

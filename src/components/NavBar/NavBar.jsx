@@ -3,7 +3,8 @@ import Wrapper from "./NavBar.styled";
 import { FaAlignLeft, FaCaretDown, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../Logo";
-import { toggleSidebar } from "../../redux/sidebar/sidebarSlice";
+import { hideSidebar, toggleSidebar } from "../../redux/sidebar/sidebarSlice";
+import { logoutUser } from "../../redux/user/userSlice";
 
 export default function NavBar() {
 	const [showLogout, setShowLogout] = useState(false);
@@ -13,6 +14,12 @@ export default function NavBar() {
 	const toggle = () => {
 		dispatch(toggleSidebar());
 	};
+
+	const logout = () => {
+		dispatch(logoutUser());
+		dispatch(hideSidebar());
+	};
+
 	return (
 		<Wrapper>
 			<div className="nav-center">
@@ -41,7 +48,7 @@ export default function NavBar() {
 						<button
 							type="button"
 							className="dropdown-btn"
-							onClick={() => console.log("logout user")}
+							onClick={logout}
 						>
 							Logout
 						</button>
