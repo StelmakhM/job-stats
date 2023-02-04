@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 import { instance } from "../../utils/axios";
+import { logoutUser } from "./userSlice";
 
 export const registerUser = createAsyncThunk(
 	"user/registerUser",
@@ -22,6 +24,28 @@ export const loginUser = createAsyncThunk(
 			return data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response);
+		}
+	}
+);
+
+export const updateUser = createAsyncThunk(
+	"user/updateUser",
+	async (user, thunkAPI) => {
+		try {
+			const { data } = await instance.patch("/auth/updateuser", user, {
+				headers: {
+					authorization: `Bearer ${
+						thunkAPI.getState().user.user.token
+					}`,
+				},
+			});
+			return data;
+		} catch (error) {
+			if (error.response.status === 401) {
+				thunkAPI.dispatch(logoutUser());
+				return thunkAPI.rejectWithValue("Unauthorized! Logging out...");
+			}
+			return thunkAPI.rejectWithValue(error.response.data.msg);
 		}
 	}
 );

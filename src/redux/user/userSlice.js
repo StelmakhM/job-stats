@@ -5,7 +5,7 @@ import {
 	getUserFromLocalStorage,
 	removeUserFromLocalStorage,
 } from "../../utils/localStorage";
-import { loginUser, registerUser } from "./userThunk";
+import { loginUser, registerUser, updateUser } from "./userThunk";
 
 const initialState = {
 	isLoading: false,
@@ -50,6 +50,18 @@ const userSlice = createSlice({
 			.addCase(loginUser.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				toast.error(payload);
+			})
+			.addCase(updateUser.pending, (state, { payload }) => {
+				state.isLoading = true;
+			})
+			.addCase(updateUser.fulfilled, (state, { payload }) => {
+				state.isLoading = false;
+				state.user = payload.user;
+				addUserToLocalStorage(payload.user);
+				toast.success("User Updated!");
+			})
+			.addCase(updateUser.rejected, (state, { payload }) => {
+				state.isLoading = false;
 			});
 	},
 });
