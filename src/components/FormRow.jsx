@@ -13,6 +13,7 @@ export default function FormRow({
 				{labelText || name}
 			</label>
 			<input
+				id={name}
 				type={type}
 				name={name}
 				value={value}

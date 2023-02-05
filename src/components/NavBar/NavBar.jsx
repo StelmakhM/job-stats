@@ -16,7 +16,7 @@ export default function NavBar() {
 	};
 
 	const logout = () => {
-		dispatch(logoutUser());
+		dispatch(logoutUser("Logging out"));
 		dispatch(hideSidebar());
 	};
 
