@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getUserFromLocalStorage } from "../../utils/localStorage";
-import { createJob } from "./jobThunk";
+import { createJob, deleteJob } from "./jobThunk";
 
 const initialState = {
 	isLoading: false,
@@ -42,6 +42,12 @@ const jobSlice = createSlice({
 			.addCase(createJob.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				toast.error(payload);
+			})
+			.addCase(deleteJob.rejected, (state, { payload }) => {
+				toast.error(payload);
+			})
+			.addCase(deleteJob.fulfilled, (state, { payload }) => {
+				toast.success(payload.msg);
 			});
 	},
 });

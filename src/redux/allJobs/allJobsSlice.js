@@ -25,6 +25,14 @@ const initialState = {
 const allJobsSlice = createSlice({
 	name: "allJobs",
 	initialState,
+	reducers: {
+		showLoading: (state) => {
+			state.isLoading = true;
+		},
+		hideLoading: (state) => {
+			state.isLoading = false;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(getAllJobs.pending, (state) => {
 			state.isLoading = true;
@@ -41,3 +49,4 @@ const allJobsSlice = createSlice({
 });
 
 export const allJobsReducer = allJobsSlice.reducer;
+export const { showLoading, hideLoading } = allJobsSlice.actions;
