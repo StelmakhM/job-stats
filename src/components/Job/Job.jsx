@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import JobInfo from "../JobInfo/JobInfo";
 import moment from "moment";
 import { deleteJob } from "../../redux/job/jobThunk";
+import { setEditJob } from "../../redux/job/jobSlice";
 
 export default function Job({
 	_id,
@@ -39,7 +40,16 @@ export default function Job({
 							to="/add-job"
 							className="btn edit-btn"
 							onClick={() => {
-								console.log("edit job");
+								dispatch(
+									setEditJob({
+										editJobId: _id,
+										position,
+										company,
+										jobLocation,
+										jobType,
+										status,
+									})
+								);
 							}}
 						>
 							edit

@@ -48,3 +48,22 @@ export const deleteJob = createAsyncThunk(
 		}
 	}
 );
+
+export const editJob = createAsyncThunk(
+	"job/editJob",
+	async ({ jobId, job }, thunkAPI) => {
+		try {
+			const response = await instance.patch(`/jobs/${jobId}`, job, {
+				headers: {
+					authorization: `Bearer ${
+						thunkAPI.getState().user.user.token
+					}`,
+				},
+			});
+			thunkAPI.dispatch(clearValues());
+			return response.data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data.msg);
+		}
+	}
+);
