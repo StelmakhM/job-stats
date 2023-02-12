@@ -14,3 +14,15 @@ export const getAllJobs = createAsyncThunk(
 		}
 	}
 );
+
+export const showStats = createAsyncThunk(
+	"allJobs/showStats",
+	async (_, thunkAPI) => {
+		try {
+			const response = await instance("/jobs/stats");
+			return response.data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data.msg);
+		}
+	}
+);
