@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance } from "../../utils/axios";
+import instance from "../../utils/axios";
 import { logoutUser } from "../user/userSlice";
 import { clearValues } from "./jobSlice";
 import { showLoading, hideLoading } from "../allJobs/allJobsSlice";
@@ -9,13 +9,7 @@ export const createJob = createAsyncThunk(
 	"job/createJob",
 	async (job, thunkAPI) => {
 		try {
-			const response = instance.post("/jobs", job, {
-				headers: {
-					authorization: `Bearer ${
-						thunkAPI.getState().user.user.token
-					}`,
-				},
-			});
+			const response = instance.post("/jobs", job);
 			thunkAPI.dispatch(clearValues());
 			return response.data;
 		} catch (error) {
@@ -33,13 +27,7 @@ export const deleteJob = createAsyncThunk(
 	async (jobId, thunkAPI) => {
 		thunkAPI.dispatch(showLoading());
 		try {
-			const response = await instance.delete(`/jobs/${jobId}`, {
-				headers: {
-					authorization: `Bearer ${
-						thunkAPI.getState().user.user.token
-					}`,
-				},
-			});
+			const response = await instance.delete(`/jobs/${jobId}`);
 			thunkAPI.dispatch(getAllJobs());
 			return response.data;
 		} catch (error) {
@@ -53,13 +41,7 @@ export const editJob = createAsyncThunk(
 	"job/editJob",
 	async ({ jobId, job }, thunkAPI) => {
 		try {
-			const response = await instance.patch(`/jobs/${jobId}`, job, {
-				headers: {
-					authorization: `Bearer ${
-						thunkAPI.getState().user.user.token
-					}`,
-				},
-			});
+			const response = await instance.patch(`/jobs/${jobId}`, job);
 			thunkAPI.dispatch(clearValues());
 			return response.data;
 		} catch (error) {
