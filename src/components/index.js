@@ -7,6 +7,11 @@ import FormRowSelect from "./FormRowSelect";
 import SearchContainer from "./SearchContainer/SearchContainer";
 import JobsContainer from "./JobsContainer/JobsContainer";
 import Job from "./Job/Job";
+import StatsContainer from "./StatsContainer/StatsContainer";
+import ChartsContainer from "./ChartsContainer/ChartsContainer";
+import AreaChartComponent from "./AreaChart/AreaChart";
+import BarChartComponent from "./BarChart/BarChart";
+
 export {
 	Logo,
 	FormRow,
@@ -17,4 +22,8 @@ export {
 	Job,
 	JobsContainer,
 	SearchContainer,
+	ChartsContainer,
+	StatsContainer,
+	AreaChartComponent,
+	BarChartComponent,
 };
