@@ -12,7 +12,7 @@ export default function SearchContainer() {
 	const dispatch = useDispatch();
 
 	const handleSearch = (e) => {
-		// is loading check
+		if (isLoading) return;
 		const { name, value } = e.target;
 		dispatch(handleChange({ name, value }));
 	};

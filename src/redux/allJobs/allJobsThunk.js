@@ -4,7 +4,12 @@ import instance from "../../utils/axios";
 export const getAllJobs = createAsyncThunk(
 	"allJobs/getAllJobs",
 	async (_, thunkAPI) => {
-		let url = `/jobs`;
+		const { page, search, searchStatus, searchType, sort } =
+			thunkAPI.getState().allJobs;
+		let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+		if (search) {
+			url += `&search=${search}`;
+		}
 		try {
 			const response = await instance(url);
 			console.log(response.data);
