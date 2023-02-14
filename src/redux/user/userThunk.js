@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import instance from "../../utils/axios";
+import { clearAllJobsState } from "../allJobs/allJobsSlice";
+import { clearValues } from "../job/jobSlice";
 import { logoutUser } from "./userSlice";
 
 export const registerUser = createAsyncThunk(
@@ -39,6 +41,20 @@ export const updateUser = createAsyncThunk(
 				return thunkAPI.rejectWithValue("Unauthorized! Logging out...");
 			}
 			return thunkAPI.rejectWithValue(error.response.data.msg);
+		}
+	}
+);
+
+export const clearStore = createAsyncThunk(
+	"user/clearStore",
+	async (message, thunkAPI) => {
+		try {
+			thunkAPI.dispatch(logoutUser(message));
+			thunkAPI.dispatch(clearAllJobsState());
+			thunkAPI.dispatch(clearValues());
+			return Promise.resolve();
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
 		}
 	}
 );
