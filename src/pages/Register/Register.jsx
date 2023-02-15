@@ -43,9 +43,7 @@ export default function Register() {
 
 	useEffect(() => {
 		if (user) {
-			setTimeout(() => {
-				navigate("/");
-			}, 2000);
+			navigate("/");
 		}
 	}, [user]);
 
@@ -88,8 +86,8 @@ export default function Register() {
 					onClick={() =>
 						dispatch(
 							loginUser({
-								email: "testUser@test.com",
-								password: "secret",
+								email: "unicorn@gmail.com",
+								password: "unicorn",
 							})
 						)
 					}

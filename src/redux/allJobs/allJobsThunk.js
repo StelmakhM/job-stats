@@ -12,7 +12,6 @@ export const getAllJobs = createAsyncThunk(
 		}
 		try {
 			const response = await instance(url);
-			console.log(response.data);
 			return response.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue("There was an error");
