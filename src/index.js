@@ -10,7 +10,7 @@ import { store } from "./store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter basename="/job/tracker">
+		<BrowserRouter basename="/job-tracker">
 			<Provider store={store}>
 				<App />
 			</Provider>
